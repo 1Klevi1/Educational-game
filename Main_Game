@@ -20,7 +20,7 @@ class MyWindow(arcade.View):
         super().__init__()
 
         self.background = arcade.load_texture(
-            f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/bg.jpg"
+            f"/Sprites_game_dev/bg.jpg"
         )
 
         # --- Required for all code that uses UI element,
