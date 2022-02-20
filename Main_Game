@@ -1,3 +1,4 @@
+#use python
 import arcade
 import arcade.gui
 
@@ -30,9 +31,9 @@ class MyWindow(arcade.View):
         # Create a vertical BoxGroup to align buttons
         self.v_box = arcade.gui.UIBoxLayout()
 
-        texture1 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art1.png",width=200,height=50)
-        texture2 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art2.png", width=200, height=50)
-        texture3 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art3.1.png", width=200, height=50)
+        texture1 = arcade.load_texture(f"/Sprites_game_dev/art1.png",width=200,height=50)
+        texture2 = arcade.load_texture(f"/Sprites_game_dev/art2.png", width=200, height=50)
+        texture3 = arcade.load_texture(f"/Sprites_game_dev/art3.1.png", width=200, height=50)
 
         start_button = arcade.gui.UITextureButton(text="Start Game", width=200,texture=texture2,
                  style={"font_color": (0, 0, 0),"font_size": 20,"bold" : True,"font_name":"Kenney Mini Square"})
@@ -68,51 +69,6 @@ class MyWindow(arcade.View):
         self.window.show_view(second_view)
 
 
-""""
-class Age_groups(arcade.View):
-    def __init__(self):
-        super().__init__()
-        self.background = arcade.load_texture(
-            f"C:/Users/E-store/OneDrive/Desktop/bg.jpg"
-        )
-        self.manager = arcade.gui.UIManager()
-        self.manager.enable()
-
-        # Create a vertical BoxGroup to align buttons
-        self.v_box = arcade.gui.UIBoxLayout()
-
-        # Create the buttons
-        Age_group1 = arcade.gui.UIFlatButton(text="Age groups", width=200)
-        self.v_box.add(Age_group1.with_space_around(bottom=20))
-
-        Age_group2 = arcade.gui.UIFlatButton(text="3-6", width=200)
-        self.v_box.add(Age_group2.with_space_around(bottom=20))
-
-        Age_group3 = QuitButton(text="7-11", width=200)
-        self.v_box.add(Age_group3.with_space_around(bottom=20))
-        Age_group3.on_click = self.on_Age_group3_click
-
-        Age_group3 = QuitButton(text="12-15", width=200)
-        self.v_box.add(Age_group3.with_space_around(bottom=20))
-
-        # Create a widget to hold the v_box widget, that will center the buttons
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x", anchor_y="center_y", child=self.v_box
-            )
-        )
-
-    def on_Age_group3_click(self, event):
-        Age_group3_view = Game_7_11()
-        self.window.show_view(Age_group3_view)
-
-    def on_draw(self):
-       # This is run once when we switch to this view
-        arcade.start_render()
-        # Drawing the background image
-        arcade.draw_texture_rectangle(300, 300, 600, 600, self.background)
-        self.manager.draw()
-"""
 
 class Game_7_11(arcade.View):
     def __init__(self):
@@ -157,14 +113,14 @@ class Game_7_11(arcade.View):
 
         self.scene.add_sprite_list("Walls", use_spatial_hash=True)
 
-        self.player_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/character_femaleAdventurer_idle.png"
+        self.player_sprite = arcade.Sprite(f"/Sprites_game_dev/character_femaleAdventurer_idle.png"
         ,scale=CHARACTER_SCALING)
-        self.NPC_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/character_maleAdventurer_idle.png"
+        self.NPC_sprite = arcade.Sprite(f"/Sprites_game_dev/character_maleAdventurer_idle.png"
                                  , scale=NPC_SCALING)
-        self.flag_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/PicsArt1.png"
+        self.flag_sprite = arcade.Sprite(f/Sprites_game_dev/PicsArt1.png"
                                         , scale=FLAG_SCALE)
 
-        self.line_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/flag_line.png"
+        self.line_sprite = arcade.Sprite(f"/Sprites_game_dev/flag_line.png"
                                          , scale=0.45)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 180
@@ -187,8 +143,8 @@ class Game_7_11(arcade.View):
         # Create the ground
         # This shows using a loop to place multiple sprites horizontally
         for x in range(0, 1250, 64):
-            wall = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/red1.png", TILE_SCALING)
-            wall1=arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/red1.png", TILE_SCALING)
+            wall = arcade.Sprite(f"/Sprites_game_dev/red1.png", TILE_SCALING)
+            wall1=arcade.Sprite(f"/Sprites_game_dev/red1.png", TILE_SCALING)
 
             wall.center_x = x
             wall.center_y = 32
