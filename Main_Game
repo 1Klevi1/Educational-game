@@ -1,1 +1,260 @@
+import arcade
+import arcade.gui
+
+# Constants used to scale our sprites from their original size
+CHARACTER_SCALING = 1
+NPC_SCALING = 0.5
+TILE_SCALING = 0.5
+FLAG_SCALE=0.5
+PLAYER_MOVEMENT_SPEED = 5
+GRAVITY = 1
+# Create a child class.
+class QuitButton(arcade.gui.UITextureButton):
+    def on_click(self, event: arcade.gui.UIOnClickEvent):
+        arcade.exit()
+
+    # Creating MainGame class
+class MyWindow(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+        self.background = arcade.load_texture(
+            f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/bg.jpg"
+        )
+
+        # --- Required for all code that uses UI element,
+        # a UIManager to handle the UI.
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+
+        # Create a vertical BoxGroup to align buttons
+        self.v_box = arcade.gui.UIBoxLayout()
+
+        texture1 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art1.png",width=200,height=50)
+        texture2 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art2.png", width=200, height=50)
+        texture3 = arcade.load_texture(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/art3.1.png", width=200, height=50)
+
+        start_button = arcade.gui.UITextureButton(text="Start Game", width=200,texture=texture2,
+                 style={"font_color": (0, 0, 0),"font_size": 20,"bold" : True,"font_name":"Kenney Mini Square"})
+        self.v_box.add(start_button.with_space_around(bottom=20))
+        # Assigning our on_buttonclick() function
+        start_button.on_click = self.on_buttonclick
+
+        settings_button = arcade.gui.UITextureButton(text="Settings", width=200,texture=texture1,
+                                                     style={"font_color": (0, 0, 0,),"font_size": 18,"bold" : True})
+        self.v_box.add(settings_button.with_space_around(bottom=20))
+
+        # Again, method 1. Use a child class to handle events.
+        quit_button = QuitButton(text="Quit", width=200,texture=texture3,
+                                 style={"font_color": (0, 0, 0),"font_size": 18,"bold" : True})
+        self.v_box.add(quit_button)
+
+        # Create a widget to hold the v_box widget, that will center the buttons
+        self.manager.add(
+            arcade.gui.UIAnchorWidget(
+                anchor_x="center_x", anchor_y="center_y", child=self.v_box
+            )
+        )
+
+    def on_draw(self):
+        arcade.start_render()
+
+        # Drawing the background image
+        arcade.draw_texture_rectangle(300, 300, 600, 600, self.background)
+        self.manager.draw()
+
+    def on_buttonclick(self, event):
+        second_view = Game_7_11()
+        self.window.show_view(second_view)
+
+
+""""
+class Age_groups(arcade.View):
+    def __init__(self):
+        super().__init__()
+        self.background = arcade.load_texture(
+            f"C:/Users/E-store/OneDrive/Desktop/bg.jpg"
+        )
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+
+        # Create a vertical BoxGroup to align buttons
+        self.v_box = arcade.gui.UIBoxLayout()
+
+        # Create the buttons
+        Age_group1 = arcade.gui.UIFlatButton(text="Age groups", width=200)
+        self.v_box.add(Age_group1.with_space_around(bottom=20))
+
+        Age_group2 = arcade.gui.UIFlatButton(text="3-6", width=200)
+        self.v_box.add(Age_group2.with_space_around(bottom=20))
+
+        Age_group3 = QuitButton(text="7-11", width=200)
+        self.v_box.add(Age_group3.with_space_around(bottom=20))
+        Age_group3.on_click = self.on_Age_group3_click
+
+        Age_group3 = QuitButton(text="12-15", width=200)
+        self.v_box.add(Age_group3.with_space_around(bottom=20))
+
+        # Create a widget to hold the v_box widget, that will center the buttons
+        self.manager.add(
+            arcade.gui.UIAnchorWidget(
+                anchor_x="center_x", anchor_y="center_y", child=self.v_box
+            )
+        )
+
+    def on_Age_group3_click(self, event):
+        Age_group3_view = Game_7_11()
+        self.window.show_view(Age_group3_view)
+
+    def on_draw(self):
+       # This is run once when we switch to this view
+        arcade.start_render()
+        # Drawing the background image
+        arcade.draw_texture_rectangle(300, 300, 600, 600, self.background)
+        self.manager.draw()
+"""
+
+class Game_7_11(arcade.View):
+    def __init__(self):
+
+        # Call the parent class and set up the window
+        super().__init__()
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+        self.manager1= arcade.gui.UIManager()
+        self.manager1.enable()
+
+        self.all_box=arcade.gui.UIBoxLayout()
+        self.h_box = arcade.gui.UIBoxLayout()
+        self.box_2=arcade.gui.UIBoxLayout(vertical=False)
+
+        first_expresion = arcade.gui.UIFlatButton(text="8 + 3 = ", width=200,style={"bg_color": (51,51,255)})
+        self.h_box.add(first_expresion.with_space_around(bottom=20))
+
+        first_box=arcade.gui.UIFlatButton(text=" 11 ", width=200,style={"bg_color": (173,216,230),"font_color": (0,0,0)})
+        self.box_2.add(first_box.with_space_around(bottom=20))
+
+        sec_box=arcade.gui.UIFlatButton(text="10",width=200,style={"bg_color": (173,216,230),"font_color": (0,0,0)})
+        self.box_2.add(sec_box.with_space_around(bottom=20,left=10))
+
+        self.all_box.add(self.h_box)
+        self.all_box.add(self.box_2)
+        self.manager.add(
+            arcade.gui.UIAnchorWidget(
+                anchor_x="center_x", anchor_y="top", child=self.all_box
+            ) )
+
+
+
+        #Initialize
+        #Scene
+        self.scene = arcade.Scene()
+
+        self.player_list = arcade.SpriteList()
+        self.NPC_list = arcade.SpriteList()
+        self.flag_list= arcade.SpriteList()
+        self.flag_line= arcade.SpriteList()
+
+        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
+
+        self.player_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/character_femaleAdventurer_idle.png"
+        ,scale=CHARACTER_SCALING)
+        self.NPC_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/character_maleAdventurer_idle.png"
+                                 , scale=NPC_SCALING)
+        self.flag_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/PicsArt1.png"
+                                        , scale=FLAG_SCALE)
+
+        self.line_sprite = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/flag_line.png"
+                                         , scale=0.45)
+        self.player_sprite.center_x = 64
+        self.player_sprite.center_y = 180
+        self.player_list.append(self.player_sprite)
+
+        self.flag_sprite.center_x=520
+        self.flag_sprite.center_y=235
+        self.flag_list.append(self.flag_sprite)
+
+        self.NPC_sprite.center_x= 64
+        self.NPC_sprite.center_y= 100
+        self.NPC_list.append(self.NPC_sprite)
+
+        self.line_sprite.center_x = 520
+        self.line_sprite.center_y = 95
+        self.flag_line.append(self.line_sprite)
+
+        arcade.set_background_color(arcade.csscolor.LIME_GREEN)
+
+        # Create the ground
+        # This shows using a loop to place multiple sprites horizontally
+        for x in range(0, 1250, 64):
+            wall = arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/red1.png", TILE_SCALING)
+            wall1=arcade.Sprite(f"C:/Users/E-store/OneDrive/Desktop/Sprites_game_dev/red1.png", TILE_SCALING)
+
+            wall.center_x = x
+            wall.center_y = 32
+            wall1.center_x=x
+            wall1.center_y=96
+
+            self.scene.add_sprite("Walls", wall)
+            self.scene.add_sprite("Wall", wall1)
+        # Create the 'physics engine'
+        #self.physics_engine = arcade.PhysicsEnginePlatformer(
+         #   self.player_sprite, gravity_constant=GRAVITY, walls=self.scene["Wall"]
+        #)
+
+    def on_key_release(self, key, modifiers):
+            """Called when the user releases a key."""
+
+            if key == arcade.key.UP or key == arcade.key.W:
+                self.player_sprite.change_y = 0
+            elif key == arcade.key.DOWN or key == arcade.key.S:
+                self.player_sprite.change_y = 0
+            elif key == arcade.key.LEFT or key == arcade.key.A:
+                self.player_sprite.change_x = 0
+            elif key == arcade.key.RIGHT or key == arcade.key.D:
+                self.player_sprite.change_x = 0
+    def on_key_press(self, key, modifiers):
+        """"Called whenever a key is pressed."""
+
+
+
+        if key == arcade.key.DOWN or key == arcade.key.S:
+            self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.LEFT or key == arcade.key.A:
+            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+
+    #def on_update(self, delta_time):
+        """Movement and game logic"""
+
+        # Move the player with the physics engine
+        #self.physics_engine.update()
+
+    def on_draw(self):
+        """Render the screen."""
+
+        # Clear the screen to the background color
+        self.clear()
+
+
+        # Draw our sprites
+        self.scene.draw()
+        self.player_list.draw()
+        self.NPC_list.draw()
+        self.flag_list.draw()
+        self.flag_line.draw()
+
+        self.manager.draw()
+
+        # Drawing the background image
+        # arcade.draw_texture_rectangle(300, 300, 600, 600)
+
+
+window = arcade.Window(600, 600)
+start_view = MyWindow()
+window.show_view(start_view)
+
+
+arcade.run()
 
